@@ -212,7 +212,7 @@ function hoho:Window(hub, the_game_name, main_color)
 	local NewDropShadow = Instance.new("ImageLabel")
 	NewDropShadow.Name = "DropShadow"
 	NewDropShadow.BackgroundTransparency = 1
-	NewDropShadow.Image = "rbxassetid://297774371"
+	NewDropShadow.Image = "rbxassetid://17139860852"
 	NewDropShadow.ImageTransparency = 0.3
 	NewDropShadow.ZIndex = -1
 	NewDropShadow.Position = UDim2.new(-0.0343199335, 0, 1.29166663, 0)
