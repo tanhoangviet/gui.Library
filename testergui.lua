@@ -29,7 +29,7 @@ local Circle = Instance.new("ImageLabel")
 Circle.Name = "Circle"
 Circle.BackgroundColor3 = Color3.new(1, 1, 1)
 Circle.BackgroundTransparency = 1
-Circle.Image = "rbxassetid://17202036908"
+Circle.Image = "rbxassetid://17139860852"
 Circle.ImageTransparency = 0.5
 
 function hoho:DraggingEnabled(frame, parent)
