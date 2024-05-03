@@ -171,39 +171,69 @@ for i = 1, 8 do
     
     -- กำหนดฟังก์ชันเทเลพอร์ตตามชื่อไอเทม
     if i == 1 then
-        Button.Text = "Shotgun"
-        Button.MouseButton1Click:Connect(function()
-            local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local originalPosition = character.HumanoidRootPart.CFrame
+    Button.Text = "Shotgun"
+    Button.MouseButton1Click:Connect(function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local originalPosition = character.HumanoidRootPart.CFrame
 
--- วาร์ปไปยัง Money
-local Shotgun = game:GetService("Workspace").Pickups.Shotgun
-character.HumanoidRootPart.CFrame = Shotgun.CFrame
+        -- วาร์ปไปยัง Money
+        local Shotgun = game:GetService("Workspace").Pickups.Shotgun
+        character.HumanoidRootPart.CFrame = Shotgun.CFrame
 
--- รอสักครู่
-wait(5) -- รอ 5 วินาที
+        -- Auto-interact with items
+        local function autoInteract()
+            while true do
+                -- Check if the player is close to the shotgun
+                local distance = (Shotgun.Position - character.HumanoidRootPart.Position).magnitude
+                if distance <= 10 then
+                    -- Interact with the shotgun
+                    -- Your interaction code goes here
+                    break -- Exit the loop if interaction is successful
+                end
+                wait(0.5) -- Wait before checking again
+            end
+        end
 
--- วาร์ปกลับมาที่ตำแหน่งเดิม
-character.HumanoidRootPart.CFrame = originalPosition
-        end)
+        -- Start auto-interaction
+        autoInteract()
+
+        -- รอสักครู่
+        wait(5) -- รอ 5 วินาที
+
+        -- วาร์ปกลับมาที่ตำแหน่งเดิม
+        character.HumanoidRootPart.CFrame = originalPosition
+    end)
+end
     elseif i == 2 then
-        Button.Text = "Shells"
-        Button.MouseButton1Click:Connect(function()
-            local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local originalPosition = character.HumanoidRootPart.CFrame
+    Button.Text = "Shells"
+    Button.MouseButton1Click:Connect(function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local originalPosition = character.HumanoidRootPart.CFrame
 
--- วาร์ปไปยัง Money
-local Shells = game:GetService("Workspace").Pickups.Shells
-character.HumanoidRootPart.CFrame = Shells.CFrame
+        -- Warp to the Shells pickup
+        local Shells = game:GetService("Workspace").Pickups.Shells
+        character.HumanoidRootPart.CFrame = Shells.CFrame
 
--- รอสักครู่
-wait(5) -- รอ 5 วินาที
+        -- Auto-interact with Shells
+        while true do
+            local distance = (Shells.Position - character.HumanoidRootPart.Position).magnitude
+            if distance <= 10 then
+                -- Interact with the Shells
+                -- Your interaction code goes here
+                break
+            end
+            wait(0.5)
+        end
 
--- วาร์ปกลับมาที่ตำแหน่งเดิม
-character.HumanoidRootPart.CFrame = originalPosition
-        end)
+        -- Wait for a few seconds
+        wait(5)
+
+        -- Warp back to the original position
+        character.HumanoidRootPart.CFrame = originalPosition
+    end)
+end
     elseif i == 3 then
         Button.Text = "Medkit"
         Button.MouseButton1Click:Connect(function()
