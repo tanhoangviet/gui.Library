@@ -204,7 +204,6 @@ for i = 1, 8 do
         -- วาร์ปกลับมาที่ตำแหน่งเดิม
         character.HumanoidRootPart.CFrame = originalPosition
     end)
-end
     elseif i == 2 then
     Button.Text = "Shells"
     Button.MouseButton1Click:Connect(function()
@@ -233,7 +232,6 @@ end
         -- Warp back to the original position
         character.HumanoidRootPart.CFrame = originalPosition
     end)
-end
     elseif i == 3 then
         Button.Text = "Medkit"
         Button.MouseButton1Click:Connect(function()
