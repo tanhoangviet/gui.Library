@@ -4,9 +4,9 @@
 
 
 
-Function Map:
+**Function Map**
 
-library: {
+```library: {
 
 	AddWindow(<string> title, <table> options [optional])
 
@@ -108,13 +108,14 @@ library: {
 
 	FormatWindows() -- will place the current windows nicely. this function is recommended to use after UI setup.
 
-}
+}```
 
 
 
 To create a new window, simply use the following function:
 
-local window = library:AddWindow(<string> title, <table> options) -- Keep in mind that the options argument is not necessary, if you just leave it nil, it will use the default ui_options table, which is located at the top.
+```lua
+local window = library:AddWindow(<string> title, <table> options) -- Keep in mind that the options argument is not necessary, if you just leave it nil, it will use the default ui_options table, which is located at the top.```
 
 
 
@@ -124,13 +125,15 @@ Notice how I assign the window to a variable ("window"). This is because the fun
 
 To add a tab to our window, we can use the following function:
 
-local tab = window:AddTab()
+```lua
+local tab = window:AddTab()``
 
 This function will also return a table with functions.
 
 To make this tab *show* as first thing, we will add this:
 
-tab:Show()
+```lua
+tab:Show()```
 
 
 
