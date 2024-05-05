@@ -106,7 +106,7 @@
 
 
 
-	FormatWindows() -- will place the current windows nicely. this function is recommended to use after UI setup.
+	FormatWindows() -- will place the current windows nicely. this function is recommended to use after UI setup.```
 
 }```
 
@@ -126,7 +126,7 @@ Notice how I assign the window to a variable ("window"). This is because the fun
 To add a tab to our window, we can use the following function:
 
 ```lua
-local tab = window:AddTab()``
+local tab = window:AddTab()```
 
 This function will also return a table with functions.
 
