@@ -119,7 +119,7 @@ local window = library:AddWindow(<string> title, <table> options) -- Keep in min
 
 
 
-Notice how I assign the window to a variable ("window"). This is because the function returns a table consisting of more functions, which you can use on this window.
+Notice how I assign the window to a variable ("window"). This is because the function returns a table consisting of more functions, which you can use on this window.```
 
 
 
