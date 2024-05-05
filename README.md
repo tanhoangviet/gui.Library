@@ -144,8 +144,7 @@ Now we can begin adding stuff to this tab!
 [Examples]:
 
 AddLabel:
-
-```
+```lua
 
 tab:AddLabel("Hello World!")
 
@@ -155,7 +154,7 @@ tab:AddLabel("Hello World!")
 
 AddButton:
 
-```
+```lua
 
 tab:AddButton("Give ...", function()
 
@@ -169,7 +168,7 @@ end)
 
 AddTextBox:
 
-```
+```lua
 
 tab:AddTextBox("Teleport to Player", function(text)
 
@@ -199,7 +198,7 @@ switch:Set(true)
 
 AddSlider:
 
-```
+```lua
 
 local slider = tab:AddSlider("WalkSpeed", function(p)
 
@@ -221,7 +220,7 @@ slider:Set(16)
 
 AddKeybind:
 
-```
+```lua
 
 local keybind = tab:AddKeybind("Toggle", function(obj)
 
@@ -239,7 +238,7 @@ end, {
 
 AddDropdown:
 
-```
+```lua
 
 local dropdown = tab:AddDropdown("Teleport to Location", function(text)
 
