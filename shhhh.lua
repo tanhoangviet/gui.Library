@@ -1,7 +1,4 @@
-local GuiLibrary = {}
-GuiLibrary.__index = GuiLibrary
-
-local function createFrame(name, size, position, color, parent, draggable, active)
+local function CreateFrame(name, size, position, color, parent, draggable, active)
     local frame = Instance.new("Frame")
     frame.Name = name
     frame.Size = size
@@ -14,7 +11,7 @@ local function createFrame(name, size, position, color, parent, draggable, activ
     return frame
 end
 
-local function createTextLabel(text, size, position, color, parent, textSize)
+local function CreateTextLabel(text, size, position, color, parent, textSize)
     local label = Instance.new("TextLabel")
     label.Size = size
     label.Position = position
@@ -27,7 +24,7 @@ local function createTextLabel(text, size, position, color, parent, textSize)
     return label
 end
 
-local function createButton(name, text, size, position, color, parent, callback)
+local function CreateButton(name, text, size, position, color, parent, callback)
     local button = Instance.new("TextButton")
     button.Name = name
     button.Size = size
@@ -44,6 +41,38 @@ local function createButton(name, text, size, position, color, parent, callback)
     return button
 end
 
+local function CreateImageButton(size, position, parent, imageId)
+    local imageButton = Instance.new("ImageButton")
+    imageButton.Size = size
+    imageButton.Position = position
+    imageButton.BackgroundColor3 = Color3.new(1, 1, 1)
+    imageButton.ImageColor3 = Color3.new(0, 0, 0)
+    imageButton.Image = imageId
+    imageButton.Parent = parent
+    return imageButton
+end
+
+local function CreateScrollingFrame(size, position, parent)
+    local scrollingFrame = Instance.new("ScrollingFrame")
+    scrollingFrame.Size = size
+    scrollingFrame.Position = position
+    scrollingFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+    scrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    scrollingFrame.Parent = parent
+    return scrollingFrame
+end
+
+local function CreateUIListLayout(parent)
+    local uiListLayout = Instance.new("UIGridLayout")
+    uiListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    uiListLayout.CellSize = UDim2.new(0.2, 0, 0.2, 0)
+    uiListLayout.CellPadding = UDim2.new(0.01, 0, 0.05, 0)
+    uiListLayout.Parent = parent
+    return uiListLayout
+end
+
+local GuiLibrary = {}
+
 function GuiLibrary.makeWindow(windowInfo)
     local self = setmetatable({}, GuiLibrary)
 
@@ -51,15 +80,15 @@ function GuiLibrary.makeWindow(windowInfo)
     gui.Name = windowInfo.Name
     gui.Parent = game.CoreGui
 
-    self.window = createFrame(windowInfo.Name, UDim2.new(0.4, 0, 0.1, 0), UDim2.new(0.1, 0, 0.2, 0), windowInfo.Color, gui, true, true)
-    createTextLabel(windowInfo.Title, UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), windowInfo.Color, self.window, 18) -- Increase title size
+    self.window = CreateFrame(windowInfo.Name, UDim2.new(0.4, 0, 0.1, 0), UDim2.new(0.1, 0, 0.2, 0), windowInfo.Color, gui, true, true)
+    CreateTextLabel(windowInfo.Title, UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), windowInfo.Color, self.window, 18) -- Increase title size
 
     return self
 end
 
-function GuiLibrary:createButton(name, page, callback)
-    local button = createButton(name, name, UDim2.new(0.3, 0, 0.2, 0), UDim2.new(0, 0, 0, 0), Color3.new(0.2, 0.2, 0.2), nil, callback) -- Dark gray button color
-    table.insert(self.pages[tonumber(page)], button)
+function GuiLibrary:addButtonToScrollingFrame(scrollingFrame, name, callback)
+    local button = CreateButton(name, name, UDim2.new(0.3, 0, 0.2, 0), UDim2.new(0, 0, 0, 0), Color3.new(0.2, 0.2, 0.2), scrollingFrame, callback) -- Dark gray button color
+    return button
 end
 
 function GuiLibrary:updatePage()
@@ -91,7 +120,7 @@ function GuiLibrary:previousPage()
 end
 
 function GuiLibrary:addCloseButton()
-    local closeButton = createButton("CloseButton", "X", UDim2.new(0.1, 0, 0.8, 0), UDim2.new(0.88, 0, 0.1, 0), Color3.new(0.8, 0.2, 0.2), self.window, function()
+    local closeButton = CreateButton("CloseButton", "X", UDim2.new(0.1, 0, 0.8, 0), UDim2.new(0.88, 0, 0.1, 0), Color3.new(0.8, 0.2, 0.2), self.window, function()
         self.window:Destroy()
     end)
 end
