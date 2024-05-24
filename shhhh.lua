@@ -50,13 +50,13 @@ function GuiLibrary.new(name, title, color, totalPages)
     gui.Parent = game.CoreGui
 
     self.window = createFrame(name, UDim2.new(0.4, 0, 0.1, 0), UDim2.new(0.1, 0, 0.2, 0), color, gui, true, true)
-    createTextLabel(title, UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), color, self.window, 10)
+    createTextLabel(title, UDim2.new(1, 0, 0.1, 0), UDim2.new(0, 0, 0, 0), color, self.window, 10)
 
     self.pages = {}
     self.currentPage = 1
     self.totalPages = tonumber(totalPages) or 3  -- Default to 3 if totalPages is not provided
 
-    self.frame = createFrame("ButtonFrame", UDim2.new(1, 0, 6, 0), UDim2.new(0, 0, 1.1, 0), color, self.window, false, true)
+    self.frame = createFrame("ButtonFrame", UDim2.new(1, 0, 6, 0), UDim2.new(0, 0, 0.2, 0), color, self.window, false, true)
     self.leftButton = createButton("LeftButton", "◀", UDim2.new(0.1, 0, 0.8, 0), UDim2.new(0.015, 0, 0.1, 0), Color3.new(1, 1, 1), self.frame, function()
         self:previousPage()
     end)
