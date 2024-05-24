@@ -50,13 +50,13 @@ function GuiLibrary.new(name, title, color, totalPages)
     gui.Parent = game.CoreGui
 
     self.window = createFrame(name, UDim2.new(0.4, 0, 0.1, 0), UDim2.new(0.1, 0, 0.2, 0), color, gui, true, true)
-    createTextLabel(title, UDim2.new(1, 0, 0.1, 0), UDim2.new(0, 0, 0, 0), color, self.window, 10)
+    createTextLabel(title, UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), color, self.window, 10)
 
     self.pages = {}
     self.currentPage = 1
     self.totalPages = tonumber(totalPages) or 3  -- Default to 3 if totalPages is not provided
 
-    self.frame = createFrame("ButtonFrame", UDim2.new(1, 0, 6, 0), UDim2.new(0, 0, 0.2, 0), color, self.window, false, true)
+    self.frame = createFrame("ButtonFrame", UDim2.new(1, 0, 6, 0), UDim2.new(0, 0, 1.1, 0), color, self.window, false, true)
     self.leftButton = createButton("LeftButton", "◀", UDim2.new(0.1, 0, 0.8, 0), UDim2.new(0.015, 0, 0.1, 0), Color3.new(1, 1, 1), self.frame, function()
         self:previousPage()
     end)
@@ -100,8 +100,7 @@ end
 
 function GuiLibrary:previousPage()
     self.currentPage = self.currentPage - 1
-    if self.currentPage < 1 then
-        self.currentPage = self.totalPages
+    if self.currentPage < 1 then self.currentPage = self.totalPages
     end
     self:updatePage()
 end
@@ -110,6 +109,28 @@ function GuiLibrary:addCloseButton()
     local closeButton = createButton("CloseButton", "X", UDim2.new(0.1, 0, 0.8, 0), UDim2.new(0.88, 0, 0.1, 0), Color3.new(1, 1, 1), self.window, function()
         self.window:Destroy()
     end)
+end
+
+function GuiLibrary:makeWindow(windowInfo)
+    local name = windowInfo.Name or "Window"
+    local title = windowInfo.Title or "Title"
+    local color = windowInfo.Color or Color3.new(1, 1, 1)
+    local page = windowInfo.Page or 1
+
+    local windowFrame = createFrame(name, UDim2.new(0.4, 0, 0.1, 0), UDim2.new(0.1, 0, 0.2, 0), color, self.window, true, true)
+    createTextLabel(title, UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), color, windowFrame, 10)
+
+    local windowPages = {}
+    for i = 1, self.totalPages do
+        windowPages[i] = {}
+    end
+
+    function windowFrame:createButton(name, callback)
+        local button = createButton(name, name, UDim2.new(0.3, 0, 0.2, 0), UDim2.new(0, 0, 0, 0), Color3.new(1, 1, 1), nil, callback)
+        table.insert(windowPages[page], button)
+    end
+
+    return windowFrame
 end
 
 return GuiLibrary
