@@ -22,6 +22,7 @@ local function createTextLabel(text, size, position, color, parent, textSize)
     label.Text = text
     label.TextSize = textSize
     label.TextColor3 = Color3.new(0, 0, 0)
+    label.Font = Enum.Font.Gotham -- Set font to Gotham
     label.Parent = parent
     return label
 end
@@ -33,48 +34,31 @@ local function createButton(name, text, size, position, color, parent, callback)
     button.Position = position
     button.BackgroundColor3 = color
     button.Text = text
-    button.TextSize = 10
+    button.TextSize = 14 -- Increase text size
     button.TextWrapped = true
     button.TextXAlignment = Enum.TextXAlignment.Left
-    button.TextColor3 = Color3.new(0, 0, 0)
+    button.TextColor3 = Color3.new(1, 1, 1) -- White text color
+    button.Font = Enum.Font.Gotham -- Set font to Gotham
     button.Parent = parent
     button.MouseButton1Click:Connect(callback)
     return button
 end
 
-function GuiLibrary.new(name, title, color, totalPages)
+function GuiLibrary.makeWindow(windowInfo)
     local self = setmetatable({}, GuiLibrary)
 
     local gui = Instance.new("ScreenGui")
-    gui.Name = name
+    gui.Name = windowInfo.Name
     gui.Parent = game.CoreGui
 
-    self.window = createFrame(name, UDim2.new(0.4, 0, 0.1, 0), UDim2.new(0.1, 0, 0.2, 0), color, gui, true, true)
-    createTextLabel(title, UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), color, self.window, 10)
+    self.window = createFrame(windowInfo.Name, UDim2.new(0.4, 0, 0.1, 0), UDim2.new(0.1, 0, 0.2, 0), windowInfo.Color, gui, true, true)
+    createTextLabel(windowInfo.Title, UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), windowInfo.Color, self.window, 18) -- Increase title size
 
-    self.pages = {}
-    self.currentPage = 1
-    self.totalPages = tonumber(totalPages) or 3  -- Default to 3 if totalPages is not provided
-
-    self.frame = createFrame("ButtonFrame", UDim2.new(1, 0, 6, 0), UDim2.new(0, 0, 1.1, 0), color, self.window, false, true)
-    self.leftButton = createButton("LeftButton", "◀", UDim2.new(0.1, 0, 0.8, 0), UDim2.new(0.015, 0, 0.1, 0), Color3.new(1, 1, 1), self.frame, function()
-        self:previousPage()
-    end)
-    self.rightButton = createButton("RightButton", "▶", UDim2.new(0.1, 0, 0.8, 0), UDim2.new(0.88, 0, 0.1, 0), Color3.new(1, 1, 1), self.frame, function()
-        self:nextPage()
-    end)
-    self.pageLabel = createTextLabel(tostring(self.currentPage), UDim2.new(0.1, 0, 0.8, 0), UDim2.new(0.45, 0, 0.1, 0), Color3.new(1, 1, 1), self.frame, 10)
-
-    for i = 1, self.totalPages do
-        self.pages[i] = {}
-    end
-
-    self:updatePage()
     return self
 end
 
 function GuiLibrary:createButton(name, page, callback)
-    local button = createButton(name, name, UDim2.new(0.3, 0, 0.2, 0), UDim2.new(0, 0, 0, 0), Color3.new(1, 1, 1), nil, callback)
+    local button = createButton(name, name, UDim2.new(0.3, 0, 0.2, 0), UDim2.new(0, 0, 0, 0), Color3.new(0.2, 0.2, 0.2), nil, callback) -- Dark gray button color
     table.insert(self.pages[tonumber(page)], button)
 end
 
@@ -100,37 +84,16 @@ end
 
 function GuiLibrary:previousPage()
     self.currentPage = self.currentPage - 1
-    if self.currentPage < 1 then self.currentPage = self.totalPages
+    if self.currentPage < 1 then
+        self.currentPage = self.totalPages
     end
     self:updatePage()
 end
 
 function GuiLibrary:addCloseButton()
-    local closeButton = createButton("CloseButton", "X", UDim2.new(0.1, 0, 0.8, 0), UDim2.new(0.88, 0, 0.1, 0), Color3.new(1, 1, 1), self.window, function()
+    local closeButton = createButton("CloseButton", "X", UDim2.new(0.1, 0, 0.8, 0), UDim2.new(0.88, 0, 0.1, 0), Color3.new(0.8, 0.2, 0.2), self.window, function()
         self.window:Destroy()
     end)
-end
-
-function GuiLibrary:makeWindow(windowInfo)
-    local name = windowInfo.Name or "Window"
-    local title = windowInfo.Title or "Title"
-    local color = windowInfo.Color or Color3.new(1, 1, 1)
-    local page = windowInfo.Page or 1
-
-    local windowFrame = createFrame(name, UDim2.new(0.4, 0, 0.1, 0), UDim2.new(0.1, 0, 0.2, 0), color, self.window, true, true)
-    createTextLabel(title, UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), color, windowFrame, 10)
-
-    local windowPages = {}
-    for i = 1, self.totalPages do
-        windowPages[i] = {}
-    end
-
-    function windowFrame:createButton(name, callback)
-        local button = createButton(name, name, UDim2.new(0.3, 0, 0.2, 0), UDim2.new(0, 0, 0, 0), Color3.new(1, 1, 1), nil, callback)
-        table.insert(windowPages[page], button)
-    end
-
-    return windowFrame
 end
 
 return GuiLibrary
