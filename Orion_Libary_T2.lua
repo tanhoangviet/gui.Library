@@ -1821,7 +1821,7 @@ function OrionLib:MakeNotifi(Configs)
   
   local TextButton = Create("TextButton", Frame2, {
     Text = "❌",
-    Font = Configs_HUB.Text_Font,
+    Font = Enum.Font.Fantasy,
     TextSize = 20,
     BackgroundTransparency = 1,
     TextColor3 = Color3.fromRGB(200, 200, 200),
