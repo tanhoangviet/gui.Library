@@ -5,6 +5,18 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
+local function createRainbowEffect()
+    local hue = 0
+    game:GetService("RunService").RenderStepped:Connect(function()
+        hue = (hue + 1) % 360
+        local strokeColor = Color3.fromHSV(hue / 360, 1, 1)
+        Default.Stroke = strokeColor
+    end)
+end
+
+-- Gọi hàm tạo hiệu ứng cầu vồng
+createRainbowEffect()
+
 local OrionLib = {
 	Elements = {},
 	ThemeObjects = {},
