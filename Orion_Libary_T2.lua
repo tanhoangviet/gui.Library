@@ -12,17 +12,17 @@ local OrionLib = {
 	Flags = {},
 	Themes = {
 		Default = {
-			Main = Color3.fromRGB(25, 25, 25),
-			Second = Color3.fromRGB(32, 32, 32),
-			Stroke = Color3.fromRGB(60, 60, 60),
-			Divider = Color3.fromRGB(60, 60, 60),
-			Text = Color3.fromRGB(240, 240, 240),
-			TextDark = Color3.fromRGB(150, 150, 150)
+    Main = Color3.fromRGB(0, 45, 95),          -- Màu xanh biển đậm
+    Second = Color3.fromRGB(0, 90, 180),       -- Màu xanh biển sáng
+    Stroke = Color3.fromRGB(0, 120, 200),      -- Màu xanh biển sáng hơn
+    Divider = Color3.fromRGB(0, 60, 120),      -- Màu xanh biển trung bình
+    Text = Color3.fromRGB(240, 255, 255),      -- Màu trắng xanh (giống như ánh sáng trên biển)
+    TextDark = Color3.fromRGB(150, 200, 255)   -- Màu xanh nhạt
 		}
 	},
 	SelectedTheme = "Default",
 	Folder = nil,
-	SaveCfg = false
+	SaveCfg = True
 }
 
 --Feather Icons https://github.com/evoincorp/lucideblox/tree/master/src/modules/util - Created by 7kayoh
