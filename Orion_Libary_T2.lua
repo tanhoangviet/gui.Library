@@ -5,6 +5,18 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
+local function rainbow()
+    local hue = 0
+    local color = Color3.fromHSV(hue / 360, 1, 1)
+    game:GetService("RunService").RenderStepped:Connect(function()
+        hue = (hue + 1) % 360
+        color = Color3.fromHSV(hue / 360, 1, 1)
+    end)
+    return function()
+        return color
+    end
+end
+
 local OrionLib = {
 	Elements = {},
 	ThemeObjects = {},
@@ -14,7 +26,7 @@ local OrionLib = {
 		Default = {
     Main = Color3.fromRGB(0, 45, 95),          -- Màu xanh biển đậm
     Second = Color3.fromRGB(0, 90, 180),       -- Màu xanh biển sáng
-    Stroke = Color3.fromRGB(0, 120, 200),      -- Màu xanh biển sáng hơn
+    Stroke = rainbow(),                        -- Màu cầu vồng
     Divider = Color3.fromRGB(0, 60, 120),      -- Màu xanh biển trung bình
     Text = Color3.fromRGB(240, 255, 255),      -- Màu trắng xanh (giống như ánh sáng trên biển)
     TextDark = Color3.fromRGB(150, 200, 255)   -- Màu xanh nhạt
@@ -25,17 +37,18 @@ local OrionLib = {
 	SaveCfg = True
 }
 
--- Hàm tạo hiệu ứng cầu vồng
-local function createRainbowEffect()
-    local hue = 0
-    game:GetService("RunService").RenderStepped:Connect(function()
-        hue = (hue + 1) % 360
-        Default.Stroke = Color3.fromHSV(hue / 360, 1, 1)
-    end)
+-- Sử dụng giá trị Stroke từ hàm rainbow
+local function updateStroke()
+    while true do
+        local strokeColor = Default.Stroke()
+        -- Cập nhật stroke của các phần tử
+        -- Ví dụ: element.StrokeColor3 = strokeColor
+        wait(0.1) -- Chờ một khoảng thời gian ngắn trước khi cập nhật lại
+    end
 end
 
--- Gọi hàm tạo hiệu ứng cầu vồng
-createRainbowEffect()
+-- Bắt đầu cập nhật stroke
+spawn(updateStroke)
 
 --Feather Icons https://github.com/evoincorp/lucideblox/tree/master/src/modules/util - Created by 7kayoh
 local Icons = {}
