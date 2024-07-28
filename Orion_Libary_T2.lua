@@ -5,18 +5,6 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
-local function createRainbowEffect()
-    local hue = 0
-    game:GetService("RunService").RenderStepped:Connect(function()
-        hue = (hue + 1) % 360
-        local strokeColor = Color3.fromHSV(hue / 360, 1, 1)
-        Default.Stroke = strokeColor
-    end)
-end
-
--- Gọi hàm tạo hiệu ứng cầu vồng
-createRainbowEffect()
-
 local OrionLib = {
 	Elements = {},
 	ThemeObjects = {},
@@ -36,6 +24,18 @@ local OrionLib = {
 	Folder = nil,
 	SaveCfg = True
 }
+
+-- Hàm tạo hiệu ứng cầu vồng
+local function createRainbowEffect()
+    local hue = 0
+    game:GetService("RunService").RenderStepped:Connect(function()
+        hue = (hue + 1) % 360
+        Default.Stroke = Color3.fromHSV(hue / 360, 1, 1)
+    end)
+end
+
+-- Gọi hàm tạo hiệu ứng cầu vồng
+createRainbowEffect()
 
 --Feather Icons https://github.com/evoincorp/lucideblox/tree/master/src/modules/util - Created by 7kayoh
 local Icons = {}
