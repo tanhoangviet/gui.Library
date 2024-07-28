@@ -1882,30 +1882,3 @@ function OrionLib:Destroy()
 end
 
 return OrionLib
-
--- Hàm để tạo gradient bảy màu
-local function createRainbowGradient()
-    return ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)), -- Đỏ
-        ColorSequenceKeypoint.new(0.17, Color3.fromRGB(255, 127, 0)), -- Cam
-        ColorSequenceKeypoint.new(0.33, Color3.fromRGB(255, 255, 0)), -- Vàng
-        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 0)), -- Xanh lá
-        ColorSequenceKeypoint.new(0.67, Color3.fromRGB(0, 0, 255)), -- Xanh dương
-        ColorSequenceKeypoint.new(0.83, Color3.fromRGB(75, 0, 130)), -- Chàm
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(148, 0, 211)) -- Tím
-    }
-end
-
--- Áp dụng gradient bảy màu cho tất cả UIStroke trong Orion Library
-local function applyRainbowGradientToAllStrokes(parent)
-    for _, instance in pairs(parent:GetDescendants()) do
-        if instance:IsA("UIStroke") then
-            local gradient = Instance.new("UIGradient")
-            gradient.Color = createRainbowGradient()
-            gradient.Parent = instance
-        end
-    end
-end
-
--- Gọi hàm để áp dụng gradient cho Orion Library
-applyRainbowGradientToAllStrokes(game.Players.LocalPlayer.PlayerGui.OrionLibrary)		
