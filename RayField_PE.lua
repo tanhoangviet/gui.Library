@@ -2459,14 +2459,12 @@ local function CreateImageButtonToHideAndDestroy(targetObject)
         end
 
         -- Ẩn đối tượng mục tiêu
-        if targetObject then
-            targetObject.Enabled = false
-        end
 
         -- Tự động hủy ImageButton sau khi nhấn
         gui:Destroy()
     end)
 end
+
 
 -- Sự kiện khi bấm vào nút Hide
 Topbar.Hide.MouseButton1Click:Connect(function()
@@ -2476,12 +2474,12 @@ Topbar.Hide.MouseButton1Click:Connect(function()
         Minimised = false
         Unhide()
     else
+        CreateImageButtonToHideAndDestroy(Topbar)
         Hidden = true
         Hide()
     end
 
     -- Gọi hàm để tạo ImageButton và ẩn Topbar
-    CreateImageButtonToHideAndDestroy(Rayfield)
 end)
 
 Topbar.ChangeSize.MouseButton1Click:Connect(function()
