@@ -2417,7 +2417,7 @@ function RayfieldLibrary:Destroy()
 	Rayfield:Destroy()
 end
 
-local function CreateImageButtonToHideAndDestroy(targetObject)
+local function CreateImageButtonToHideAndDestroy()
     -- Tạo `ScreenGui` chứa ImageButton
     local gui = Instance.new("ScreenGui")
     gui.Name = "patrickGui"
@@ -2473,7 +2473,7 @@ Topbar.Hide.MouseButton1Click:Connect(function()
         Minimised = false
         Unhide()
     else
-        CreateImageButtonToHideAndDestroy(Topbar)
+        CreateImageButtonToHideAndDestroy()
         Hidden = true
         Hide()
     end
