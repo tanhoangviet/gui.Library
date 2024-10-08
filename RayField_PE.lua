@@ -692,7 +692,7 @@ function Unhide()
 	Debounce = true
 	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Main.Visible = true
-	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 500, 0, 475)}):Play()
+	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 500, 0, 405)}):Play()
 	TweenService:Create(Main.Topbar, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 500, 0, 45)}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {ImageTransparency = 0.4}):Play()
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
@@ -1262,10 +1262,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 				end
 			end
 			if Elements.UIPageLayout.CurrentPage ~= TabPage then
-				TweenService:Create(Elements, TweenInfo.new(1, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 460,0, 330)}):Play()
+				TweenService:Create(Elements, TweenInfo.new(1, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 460,0, 290)}):Play()
 				Elements.UIPageLayout:JumpTo(TabPage)
 				wait(0.2)
-				TweenService:Create(Elements, TweenInfo.new(0.8, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 475,0, 366)}):Play()
+				TweenService:Create(Elements, TweenInfo.new(0.8, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 475,0, 306)}):Play()
 			end
 
 		end)
@@ -2443,11 +2443,8 @@ local function CreateImageButtonToHideAndDestroy()
     images.Thickness = 2
     images.Parent = imageb
 
-    -- Xử lý sự kiện khi ImageButton được nhấn
     imageb.MouseButton1Click:Connect(function()
         if Debounce then return end
-
-        -- Kiểm tra trạng thái và gọi hàm Hide/Unhide tương ứng
         if Hidden then
             Hidden = false
             Minimised = false
@@ -2456,16 +2453,10 @@ local function CreateImageButtonToHideAndDestroy()
             Hidden = true
             Hide()
         end
-
-        -- Ẩn đối tượng mục tiêu
-
-        -- Tự động hủy ImageButton sau khi nhấn
         gui:Destroy()
     end)
 end
 
-
--- Sự kiện khi bấm vào nút Hide
 Topbar.Hide.MouseButton1Click:Connect(function()
     if Debounce then return end
     if Hidden then
@@ -2477,8 +2468,6 @@ Topbar.Hide.MouseButton1Click:Connect(function()
         Hidden = true
         Hide()
     end
-
-    -- Gọi hàm để tạo ImageButton và ẩn Topbar
 end)
 
 Topbar.ChangeSize.MouseButton1Click:Connect(function()
